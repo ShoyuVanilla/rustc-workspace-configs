@@ -1,0 +1,26 @@
+[language-server.rust-analyzer.config]
+rust.analyzerTargetDir = true
+rustc.source = "./Cargo.toml"
+linkedProjects = [
+  "Cargo.toml",
+  "src/tools/x/Cargo.toml",
+  "src/bootstrap/Cargo.toml",
+  "src/tools/rust-analyzer/Cargo.toml",
+  "compiler/rustc_codegen_cranelift/Cargo.toml",
+  "compiler/rustc_codegen_gcc/Cargo.toml",
+]
+rustfmt.overrideCommand = ["./build/host/rustfmt/bin/rustfmt", "--edition=2021"]
+procMacro = { server = "./build/host/stage0/libexec/rust-analyzer-proc-macro-srv", enabled = true }
+
+[language-server.rust-analyzer.config.cargo]
+buildScript.enabled = true
+buildScript.invocationLocation = "root"
+buildScript.invocationStrategy = "once"
+buildScript.overrideCommand = ["python3", "x.py", "check", "--json-output"]
+sysrootSrc = "./library"
+extraEnv = { RUSTC_BOOTSTRAP = 1 }
+
+[language-server.rust-analyzer.config.check]
+invocationLocation = "root"
+invocationStrategy = "once"
+overrideCommand = ["python3", "x.py", "check", "--json-output"]
