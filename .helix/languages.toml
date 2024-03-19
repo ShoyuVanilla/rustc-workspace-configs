@@ -1,5 +1,4 @@
 [language-server.rust-analyzer.config]
-rust.analyzerTargetDir = true
 rustc.source = "./Cargo.toml"
 linkedProjects = [
   "Cargo.toml",
@@ -13,6 +12,7 @@ rustfmt.overrideCommand = ["./build/host/rustfmt/bin/rustfmt", "--edition=2021"]
 procMacro = { server = "./build/host/stage0/libexec/rust-analyzer-proc-macro-srv", enabled = true }
 
 [language-server.rust-analyzer.config.cargo]
+targetDir = true
 buildScript.enabled = true
 buildScript.invocationLocation = "root"
 buildScript.invocationStrategy = "once"
